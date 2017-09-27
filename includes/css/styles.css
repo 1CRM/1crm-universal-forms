@@ -1,0 +1,37 @@
+.ocrmf-invalid-field {
+	display: block;
+	color: #F33;
+}
+
+.ocrmf-form-error {
+	display: block;
+	color: #F33;
+}
+
+.ocrmf-form table,.ocrmf-form td {
+	border: none;
+}
+
+.ocrmf-form td.ocrmf-field-label {
+	vertical-align: top;
+}
+
+.ocrmf-form td.ocrmf-submit {
+	text-align: center;
+}
+
+.ocrmf-form-status {
+	border: solid 2px #30D;
+	display: none;
+	padding: 5px;
+	margin-top: 10px;
+}
+
+.ocrmf-form-status[role="alert"] {
+	border-color: #D03;
+}
+
+.ocrmf-input.submit[disabled] {
+	background-color: #CCC;
+}
+
