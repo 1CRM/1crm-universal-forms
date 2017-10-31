@@ -60,6 +60,7 @@ class OneCRMForm {
 				'phone' =>  __('Invalid telephone number format.', OCRMF_TEXTDOMAIN),
 				'date' =>  __('Invalid date format.', OCRMF_TEXTDOMAIN),
 				'error_posting' => __('Error posting form. Please try again later.', OCRMF_TEXTDOMAIN),
+				'captcha' => __('You did not confirm that you are a human.', OCRMF_TEXTDOMAIN),
 				'success' => __('Your message was sent. Thanks.', OCRMF_TEXTDOMAIN),
 			);
 			self::$message_descriptions = array(
@@ -72,6 +73,7 @@ class OneCRMForm {
 				'phone' =>  __('Telephone number is not valid.', OCRMF_TEXTDOMAIN),
 				'date' =>  __('Date entry is not valid.', OCRMF_TEXTDOMAIN),
 				'error_posting' => __('An error occured when posting the form.', OCRMF_TEXTDOMAIN),
+				'captcha' => __('Visitor failed to solve CAPTCHA.', OCRMF_TEXTDOMAIN),
 				'success' => __('Messages sent successfully.', OCRMF_TEXTDOMAIN),
 			);
 		}
@@ -206,6 +208,7 @@ class OneCRMForm {
 		$http->send($response);
 		if (strlen($this->success_url))
 			$response['redirect'] = $this->success_url;
+		$response['xxx'] = $_POST;
 	}
 
 	public function add_js_messages() {

@@ -30,10 +30,11 @@ class OneCRMFormRenderer {
 			wp_enqueue_script(
 				'ocrmf-forms',
 				OCRMF_PLUGIN_URL . '/includes/js/forms.js',
-				array( 'jquery', 'jquery-form' ),
+				array( 'jquery', 'jquery-form', ),
 				OCRMF_VERSION,
 				true
 			);
+			echo '<script src="https://www.google.com/recaptcha/api.js?onload=onecrmFormsInit&render=explicit" async defer></script>';
 			$script = true;
 		}
 		$re = '~\{([a-z][0-9A-Z:._-]*)\}~i';
@@ -255,6 +256,7 @@ class OneCRMFormRenderer {
 	}
 
 	private function render_submit($def) {
+		$id = 'ocrmf_form_' . $this->form->id;
 		$attrs = array(
 			'type' => 'submit',
 			'class' => 'ocrmf-input submit',
@@ -272,6 +274,19 @@ class OneCRMFormRenderer {
 			'class' => 'ocrmf-input text',
 		);
 		return $this->render_input($def, $attrs);
+	}
+
+	private function render_captcha($def) {
+        $key = get_option('ocrmf_recaptcha_key');
+		$attrs = array(
+			'class' => 'recaptcha',
+			'data-sitekey' => $key,
+			'data-size' => !empty($def->invisible) ? 'invisible' : 'normal',
+		);
+		$input_attrs = array('type' => 'hidden', 'class' => 'ocrmf-captcha', 'name' => $def->name);
+		$ret = $this->make_tag('div', $attrs, false) . '</div>'
+			. $this->make_tag('input', $input_attrs, false);
+		return $ret;
 	}
 
 	private function render_input($def, $attrs, $textarea = false) {

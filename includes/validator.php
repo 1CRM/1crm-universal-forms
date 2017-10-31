@@ -1,6 +1,7 @@
 <?php
 
 require_once OCRMF_INCLUDES_DIR . '/form.php';
+require_once OCRMF_INCLUDES_DIR . '/gcaptcha/GCaptchaAPIClient.php';
 
 class OneCRMFormValidator {
 	private $form;
@@ -41,6 +42,9 @@ class OneCRMFormValidator {
 		'phone' => array(
 			array('required'),
 			array('re', '~^[+]?[0-9() -]*$~', 'phone'),
+		),
+		'captcha' => array(
+			array('captcha')
 		),
 	);
 
@@ -160,6 +164,19 @@ class OneCRMFormValidator {
 			return false;
 		}
 		return true;
+	}
+
+	public function validate_captcha($field, $value, $validator, &$result) {
+		$secret = get_option('ocrmf_recaptcha_secret');
+		$validator = new GCaptchaAPIClient($secret);
+		$data = $validator->validate($value);
+		$name = $field->name;
+		if (!$data || !$data['success']) {
+			$result['errors'][$name] = 'captcha';
+			return false;
+		}
+		return true;
+
 	}
 
 }

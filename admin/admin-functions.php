@@ -31,6 +31,8 @@ function register_ocrmf_settings() {
 	register_setting( 'ocrmf_options_group', 'ocrmf_lg_url' ); 
 	register_setting( 'ocrmf_options_group', 'ocrmf_lg_id' ); 
 	register_setting( 'ocrmf_options_group', 'ocrmf_lg_secret' ); 
+	register_setting( 'ocrmf_options_group', 'ocrmf_recaptcha_key' ); 
+	register_setting( 'ocrmf_options_group', 'ocrmf_recaptcha_secret' ); 
 } 
 
 
@@ -121,6 +123,20 @@ is OAuth 2. Then enter Lead Guerrilla URL, Client ID and Client Secret below. <b
         <td><input type="text" name="ocrmf_lg_secret" value="<?php echo get_option('ocrmf_lg_secret'); ?>" /></td>
 	</tr>
 </table>
+<div style="font-size: 110%; max-width: 600px">
+If you want to use Google's reCAPTCHA, <a target="_blank" href="https://www.google.com/recaptcha/admin">register</a>
+for API keys first.
+</div>
+<table class="form-table">
+	<tr valign="top">
+		<th scope="row">reCAPTCHA site key</th>
+        <td><input type="text" name="ocrmf_recaptcha_key" value="<?php echo get_option('ocrmf_recaptcha_key'); ?>" /></td>
+	</tr>
+	<tr valign="top">
+		<th scope="row">reCAPTCHA secret key</th>
+        <td><input type="text" name="ocrmf_recaptcha_secret" value="<?php echo get_option('ocrmf_recaptcha_secret'); ?>" /></td>
+	</tr>
+</table>
 <?php submit_button(); ?>
 </form>
 <?php
@@ -192,6 +208,7 @@ function ocrmf_fields_meta_box($post) {
 		'checkbox' => 'Checkbox',
 		'radio' => 'Radio buttons',
 		'hidden' => 'Hidden field',
+		'captcha' => 'CAPTCHA',
 		'submit' => 'Submit button',
 	);
 ?>

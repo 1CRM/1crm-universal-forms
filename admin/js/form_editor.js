@@ -176,6 +176,13 @@ OneCRMFormEditor = new function() {
 				type: 'text'
 			}
 		],
+		captcha: [
+			{
+				name: 'invisible',
+				label: 'Invisible',
+				type: 'bool'
+			}
+		],
 		hidden: [
 			{
 				name: 'value',
@@ -324,12 +331,14 @@ OneCRMFormEditor = new function() {
 		'checkbox' : 'Checkbox',
 		'radio' : 'Radio buttons',
 		'hidden' : 'Hidden field',
+		'captcha' : 'Captcha',
 		'submit' : 'Submit button'
 	};
 
 	this.no_req_opt = {
 		'radio' : 1,
 		'submit' : 1,
+		'captcha' : 1,
 		'hidden' : 1
 	};
 
@@ -455,7 +464,7 @@ OneCRMFormEditor = new function() {
 		h3.appendChild(editor.createText(editor.field_type_titles[f.type]));
 		container.appendChild(h3);
 		var meta = editor.fields_meta[f.type].map(function(el) {return el});
-		if (f.type != 'submit') {
+		if (f.type != 'submit' && f.type != 'captcha') {
 			meta.push(editor.onecrm_field);
 			meta.push(editor.onecrm_field_custom);
 			meta.push(editor.onecrm_case_field);
@@ -472,6 +481,7 @@ OneCRMFormEditor = new function() {
 					$(this).val(val);
 				}
 			);
+		if (f.type != 'captcha')
 		editor.render_text(
 			f, container, {name: 'id', type: 'text', label: 'id (optional)'},
 			function() {
@@ -480,7 +490,7 @@ OneCRMFormEditor = new function() {
 				$(this).val(val);
 			}
 		);
-		if (f.type != 'hidden')
+		if (f.type != 'hidden' && f.type != 'captcha')
 			editor.render_text(
 				f, container, {name: 'class', type: 'text', label: 'class (optional)'},
 				function() {
