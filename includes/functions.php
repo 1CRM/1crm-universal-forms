@@ -1,8 +1,10 @@
 <?php
 
 require_once OCRMF_INCLUDES_DIR . '/form.php';
-define('OCRM_EX1', '_1crm_ex1');
-define('OCRM_EX2', '_1crm_ex2');
+if (!defined('OCRM_EX1'))
+	define('OCRM_EX1', '_1crm_ex1');
+if (!defined('OCRM_EX2'))
+	define('OCRM_EX2', '_1crm_ex2');
 
 function ocrmf_register_post_types() {
 	OneCRMForm::register_post_types();
