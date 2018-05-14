@@ -34,7 +34,6 @@ class OneCRMFormRenderer {
 				OCRMF_VERSION,
 				true
 			);
-			echo '<script src="https://www.google.com/recaptcha/api.js?onload=onecrmFormsInit&render=explicit" async defer></script>';
 			$script = true;
 		}
 		$re = '~\{([a-z][0-9A-Z:._-]*)\}~i';

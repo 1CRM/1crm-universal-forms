@@ -296,6 +296,19 @@ function ocrmf_script_meta_box($post) {
 		</select></span>
 	</div>
 	<div>
+		<span class="ocrmf-label"><?php echo esc_html(__('External script URL', OCRMLF_TEXTDOMAIN))?></span>
+		<span class="ocrmf-field"><input type="text" name="ocrmf-url" id="ocrmf-url" value="<?php echo esc_attr($post->url)?>" /></span>
+	</div>
+	<div>
+		<span class="ocrmf-label"><?php echo esc_html(__('HTTP method', OCRMLF_TEXTDOMAIN)) ?></span>
+		<span class="ocrmf-field">
+			<select name="ocrmf-method">
+				<option value="POST">POST</option>
+				<option value="GET" <?php if ($post->method == 'GET') echo ' selected="selected"' ?>>GET</option>
+			</select>
+		</span>
+	</div>
+	<div>
 		<span class="ocrmf-label"><?php echo esc_html(__('Redirect URL', OCRMF_TEXTDOMAIN))?></span>
 		<span class="ocrmf-field"><input type="text" name="ocrmf-success-url" value="<?php echo esc_html($post->success_url) ?>"></span>
 	</div>
