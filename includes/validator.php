@@ -31,6 +31,9 @@ class OneCRMFormValidator {
 		'radio' => array(
 			array('required_always'),
 		),
+		'checkbox' => array(
+			array('required'),
+		),
 		'email' => array(
 			array('required'),
 			array('email'),
